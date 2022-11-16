@@ -29,13 +29,6 @@ You can run `demo.sh` for a quick demo.
 ### Stop server properly
 `curl -XPOST http://localhost:8080/actuator/shutdown -v`
 
-
-## TODO
-
-les fichiers 3 a 8 ne puvent etre ouverts avec editeur PDF
-=> tenter de corriger les fichiers en utilisant l'offset retourné pour tronquer les fichiers
-
-
 ## Resources
 
 - PDF file format:
