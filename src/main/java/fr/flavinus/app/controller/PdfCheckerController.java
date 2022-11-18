@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,12 +24,17 @@ public class PdfCheckerController {
 
     @PostMapping("/pdf/checkFile")
     public PdfCheckerPayload checkFile(@RequestParam("file") MultipartFile file) {
+        InputStream stream = null;
         try {
-            return service.checkFile(file.getInputStream(), file.getOriginalFilename(), file.getContentType(), file.getSize());
+            return service.checkFile(stream = file.getInputStream());
         } catch (IOException ex) {
             // TODO: fails for every files if called from "/pdf/checkFiles"
             throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "File read failure", ex);
-        }        
+        } finally {
+            try {
+                if(stream != null) stream.close();
+            } catch (Throwable ignore) {}
+        }
     }
 
     @PostMapping("/pdf/checkFiles")
