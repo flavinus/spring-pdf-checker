@@ -26,9 +26,8 @@ public class PdfCheckerController {
     public PdfCheckerPayload checkFile(@RequestParam("file") MultipartFile file) {
         InputStream stream = null;
         try {
-            return service.checkFile(stream = file.getInputStream());
+            return service.checkFile(stream = file.getInputStream(), file.getSize());
         } catch (IOException ex) {
-            // TODO: fails for every files if called from "/pdf/checkFiles"
             throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "File read failure", ex);
         } finally {
             try {
