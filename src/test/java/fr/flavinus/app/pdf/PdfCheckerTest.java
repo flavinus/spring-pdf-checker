@@ -57,7 +57,6 @@ public class PdfCheckerTest {
         pdfCheckerTestFile("samples/minimal-pdf-sample.pdf", 8422);
         pdfCheckerTestFile("README.md", -1);
 
-        /* Waiting for commit confirmation
         pdfCheckerTestFile("samples/test_1.pdf", 4568);
         pdfCheckerTestFile("samples/test_2.pdf", 22195);
         pdfCheckerTestFile("samples/test_3.pdf", 19155);
@@ -66,7 +65,6 @@ public class PdfCheckerTest {
         pdfCheckerTestFile("samples/test_6.pdf", 18835);
         pdfCheckerTestFile("samples/test_7.pdf", 22145);
         pdfCheckerTestFile("samples/test_8.pdf", 22139);
-        */
     }
 
     private void pdfCheckerTestFile(String filename, long offset) {
