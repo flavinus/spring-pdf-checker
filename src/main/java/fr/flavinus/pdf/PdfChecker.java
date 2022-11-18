@@ -30,9 +30,7 @@ import java.util.regex.Pattern;
  */
 public class PdfChecker {
 
-    private static final Charset usedCharset = StandardCharsets.US_ASCII;
-    private static final Pattern PDF_HEADER_PATTERN = Pattern.compile("^%PDF-\\d\\.\\d.*");
-    private static final Pattern EOF_PATTERN = Pattern.compile("^%%EOF.*");   
+    private static final Charset usedCharset = StandardCharsets.US_ASCII;    
 
     private long currentLineOffset = 0;
     private long lastEofOffset = -1;
@@ -53,12 +51,32 @@ public class PdfChecker {
         return lastEofOffset;
     }
 
+    //private static final Pattern PDF_HEADER_PATTERN = Pattern.compile("^%PDF-\\d\\.\\d.*");
+
     public static boolean lineMatchPdfHeader(String line) {
-        return PDF_HEADER_PATTERN.matcher(line).matches();
+        //return PDF_HEADER_PATTERN.matcher(line).matches();
+
+        return line.length() > 7
+            && line.charAt(0) == '%'
+            && line.charAt(1) == 'P'
+            && line.charAt(2) == 'D'
+            && line.charAt(3) == 'F'
+            && line.charAt(4) == '-'
+            && Character.isDigit(line.charAt(5))
+            && line.charAt(6) == '.'
+            && Character.isDigit(line.charAt(7));
     }
 
+    //private static final Pattern EOF_PATTERN = Pattern.compile("^%%EOF.*");
+
     public static boolean lineMatchEof(String line) {
-        return EOF_PATTERN.matcher(line).matches();
+        //return EOF_PATTERN.matcher(line).matches();
+        return line.length() > 4
+            && line.charAt(0) == '%'
+            && line.charAt(1) == '%'
+            && line.charAt(2) == 'E'
+            && line.charAt(3) == 'O'
+            && line.charAt(4) == 'F';
     }
 
     public static long execute(InputStream stream) {        
