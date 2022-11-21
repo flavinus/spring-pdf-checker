@@ -1,21 +1,22 @@
 package fr.flavinus.app.pdf;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
 import org.junit.Test;
 import fr.flavinus.pdf.PdfChecker;
 
 public class PdfCheckerTest {
+
+    @Test
+    public void testLineFeedLength() {
+        assertEquals(1, "\n".getBytes(PdfChecker.usedCharset).length);
+    }
 
     @Test
     public void testIndexOf() {
@@ -72,7 +73,7 @@ public class PdfCheckerTest {
         assertNotNull("Failed to load test file '" + filename + "'", inputStream);
 
         try {
-            assertEquals("Failed pdfBytesChecker execute on file '" + filename + "'", offset, PdfChecker.run(inputStream, fileSize));
+            assertEquals("Failed pdfChecker execute on file '" + filename + "'", offset, PdfChecker.run(inputStream, fileSize));
         } catch (Exception e) {
             assertNull(e);
         }
