@@ -1,7 +1,9 @@
 
 # Spring PDF Checker
 
-This project provides a small spring boot application which exposes webservices allowing to get the offset of the last %%EOF of a PDF document.
+This project provides a small spring boot application which exposes webservices allowing to check validity of a PDF document by returning the offset of the last %%EOF in document.
+ * We check for validity of PDF header before searching EOF
+ * The offset is searched only at the very end of document
 
 ## Build & test
 
